@@ -11,9 +11,10 @@ public class HandlerTest {
     public void testHandler(){
 //        00001010
 //        System.out.println("ret:"+(1<<3));
-        for(int i = 0;i<100; i++ ) {
-            final int pageStart = (i * 100);
-            System.out.println("pageStart:"+pageStart);
-        }
+//        for(int i = 0;i<100; i++ ) {
+//            final int pageStart = (i * 100);
+//            System.out.println("pageStart:"+pageStart);
+//        }
+        System.out.println("hash:"+"D20161019101449160003128379".hashCode()%128);
     }
 }
