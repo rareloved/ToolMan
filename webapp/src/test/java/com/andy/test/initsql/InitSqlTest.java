@@ -57,4 +57,26 @@ public class InitSqlTest {
         }
 //        System.out.println("hash:"+"D20161019101449160003128379".hashCode()%128);
     }
+
+    @Test
+    public void testSql1(){
+        int size = 128;
+        StringBuffer buffer = new StringBuffer();
+        for(int i=0;i<size;i++){
+            String tableNo= "";
+            String stri = i+"";
+            if(stri.toCharArray().length ==1){
+                tableNo = "00"+i;
+            }else if(stri.toCharArray().length ==2){
+                tableNo = "0"+i;
+            }else if(stri.toCharArray().length ==3){
+                tableNo = ""+i;
+            }
+            String temp =" SELECT order_id,count(1) FROM reconciliation_result_"+tableNo+" GROUP BY order_id HAVING count(1) >1 union ";
+//                String temp = "select top 1 id from reconciliation_result_"+tableNo+" where order_id in (SELECT order_id FROM reconciliation_result_"+tableNo+" GROUP BY order_id HAVING count(1) >1)";
+            buffer.append(temp);
+            buffer.append("\n");
+        }
+        System.out.println("data:"+buffer);
+    }
 }
