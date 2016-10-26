@@ -79,4 +79,8 @@ public class InitSqlTest {
         }
         System.out.println("data:"+buffer);
     }
+    @Test
+    public void testddd(){
+        System.out.println("hash:"+"1610230042629096117002".hashCode()%128);
+    }
 }
