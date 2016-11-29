@@ -21,4 +21,14 @@ public class MathEqualTest {
         System.out.printf("flag:"+flag);
 
     }
+    @Test
+    public void testBigDecimalLong2(){
+        Byte b = new Byte("100");
+        Byte longVal = 100;
+        if(longVal == b){
+            System.out.println("两个数据相等:"+b.longValue());
+        }else {
+            System.out.println("sorry，两个数据不相等"+b);
+        }
+    }
 }
