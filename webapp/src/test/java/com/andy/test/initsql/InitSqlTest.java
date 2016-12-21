@@ -110,8 +110,47 @@ public class InitSqlTest {
         System.out.println(buffer);
     }
 
+    /**
+     *
+     * ALTER TABLE `reconciliation_result_0`
+     DROP INDEX `lx_order_id` ,
+     ADD UNIQUE INDEX `lx_order_id` (`order_id`, `fund_channel_code`) USING BTREE ;
+     */
+    @Test
+    public  void multiChannelIndexSql(){
+        for(int i = 0 ;i<128;i++){
+            StringBuffer sql = new StringBuffer("ALTER TABLE reconciliation_result_");
+            sql.append(String.format("%03d",i));
+            sql.append(" DROP INDEX lx_order_id ,ADD UNIQUE INDEX lx_order_id (order_id, fund_channel_code) USING BTREE ;");
+            System.out.println(sql.toString());
+        }
+    }
+
+    @Test
+    public  void multiChannelIndexSqlTestEnv1(){
+        for(int i = 0 ;i<2;i++){
+            StringBuffer sql = new StringBuffer("ALTER TABLE reconciliation_result_");
+            sql.append(String.format("%01d",i));
+            sql.append(" DROP INDEX lx_order_id ,ADD UNIQUE INDEX lx_order_id (order_id, fund_channel_code) USING BTREE ;");
+            System.out.println(sql.toString());
+        }
+    }
+
+    @Test
+    public  void multiChannelIndexSqlTestEnv2(){
+        for(int i = 0 ;i<2;i++){
+            StringBuffer sql = new StringBuffer("ALTER TABLE reconciliation_result_");
+            sql.append(String.format("%01d",i));
+            sql.append(" DROP INDEX lx_order_id ,ADD UNIQUE INDEX lx_order_id (order_id) USING BTREE ;");
+            System.out.println(sql.toString());
+        }
+    }
     @Test
     public void testddd() {
-        System.out.println("hash:" + "1611280046410096122016".hashCode() % 128);
+        System.out.println("hash:" + "1612150017427087120004".hashCode() % 128);
+        Integer a = null;
+        if(a !=null && a ==9){
+            System.out.println(a);
+        }
     }
 }
