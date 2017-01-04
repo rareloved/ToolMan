@@ -117,13 +117,40 @@ public class InitSqlTest {
      ADD UNIQUE INDEX `lx_order_id` (`order_id`, `fund_channel_code`) USING BTREE ;
      */
     @Test
-    public  void multiChannelIndexSql(){
+    public  void multiChannelIndexSql() throws IOException {
+        OutputStream outputStream = new FileOutputStream("src/multiChannel.sql");
+        StringBuffer sqlTotal = new StringBuffer();
         for(int i = 0 ;i<128;i++){
             StringBuffer sql = new StringBuffer("ALTER TABLE reconciliation_result_");
             sql.append(String.format("%03d",i));
             sql.append(" DROP INDEX lx_order_id ,ADD UNIQUE INDEX lx_order_id (order_id, fund_channel_code) USING BTREE ;");
+            sqlTotal.append(sql +"\n");
             System.out.println(sql.toString());
         }
+        outputStream.write(sqlTotal.toString().getBytes());
+        outputStream.close();
+
+    }
+
+    /**
+     *
+     * ALTER TABLE `business_reconciliation_his_000`
+     MODIFY COLUMN `bank_card_no`  varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行卡号' AFTER `trade_status`;
+     */
+    @Test
+    public  void moneyBoxBankNoLength() throws IOException {
+        OutputStream outputStream = new FileOutputStream("src/moneyBoxBankNoLength.sql");
+        StringBuffer sqlTotal = new StringBuffer();
+        for(int i = 0 ;i<128;i++){
+            StringBuffer sql = new StringBuffer("ALTER TABLE business_reconciliation_his_");
+            sql.append(String.format("%03d",i));
+            sql.append(" MODIFY COLUMN bank_card_no  varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行卡号' AFTER trade_status;");
+            sqlTotal.append(sql +"\n");
+            System.out.println(sql.toString());
+        }
+        outputStream.write(sqlTotal.toString().getBytes());
+        outputStream.close();
+
     }
 
     @Test
@@ -147,7 +174,7 @@ public class InitSqlTest {
     }
     @Test
     public void testddd() {
-        System.out.println("hash:" + "1612150017427087120004".hashCode() % 128);
+        System.out.println("hash:" + "1612220045194096120326".hashCode() % 128);
         Integer a = null;
         if(a !=null && a ==9){
             System.out.println(a);
