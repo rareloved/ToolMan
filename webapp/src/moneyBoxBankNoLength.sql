@@ -1,3 +1,4 @@
+ALTER TABLE business_reconciliation MODIFY COLUMN bank_card_no  varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行卡号' AFTER trade_status;
 ALTER TABLE business_reconciliation_his_000 MODIFY COLUMN bank_card_no  varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行卡号' AFTER trade_status;
 ALTER TABLE business_reconciliation_his_001 MODIFY COLUMN bank_card_no  varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行卡号' AFTER trade_status;
 ALTER TABLE business_reconciliation_his_002 MODIFY COLUMN bank_card_no  varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行卡号' AFTER trade_status;

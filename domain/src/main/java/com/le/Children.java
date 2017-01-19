@@ -11,4 +11,15 @@ package com.le;
  * @since java 1.7.0
  */
 public class Children extends AndyFather {
+    private String name;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 }

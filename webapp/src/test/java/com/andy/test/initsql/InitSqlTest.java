@@ -118,20 +118,37 @@ public class InitSqlTest {
      */
     @Test
     public  void multiChannelIndexSql() throws IOException {
-        OutputStream outputStream = new FileOutputStream("src/multiChannel.sql");
+//        OutputStream outputStream = new FileOutputStream("src/multiChannel.sql");
         StringBuffer sqlTotal = new StringBuffer();
         for(int i = 0 ;i<128;i++){
             StringBuffer sql = new StringBuffer("ALTER TABLE reconciliation_result_");
             sql.append(String.format("%03d",i));
-            sql.append(" DROP INDEX lx_order_id ,ADD UNIQUE INDEX lx_order_id (order_id, fund_channel_code) USING BTREE ;");
+            sql.append(" ADD COLUMN channel_type  varchar(64) NULL COMMENT '渠道类型 UPS MONEYBOX' AFTER inst_order_no;");
             sqlTotal.append(sql +"\n");
             System.out.println(sql.toString());
         }
-        outputStream.write(sqlTotal.toString().getBytes());
-        outputStream.close();
+        System.out.println(sqlTotal.toString());
+//        outputStream.write(sqlTotal.toString().getBytes());
+//        outputStream.close();
 
     }
 
+    @Test
+    public  void multiChannelIndexSql22() throws IOException {
+//        OutputStream outputStream = new FileOutputStream("src/multiChannel.sql");
+        StringBuffer sqlTotal = new StringBuffer();
+        for(int i = 0 ;i<128;i++){
+            StringBuffer sql = new StringBuffer("ALTER TABLE reconciliation_result_");
+            sql.append(String.format("%03d",i));
+            sql.append(" ADD COLUMN channel_type  varchar(64) NULL COMMENT '渠道类型 UPS MONEYBOX' AFTER inst_order_no,ADD COLUMN rec_business_ordertype  int(8) NULL COMMENT '对账订单业务类型'  AFTER channel_type;");
+            sqlTotal.append(sql +"\n");
+            System.out.println(sql.toString());
+        }
+        System.out.println(sqlTotal.toString());
+//        outputStream.write(sqlTotal.toString().getBytes());
+//        outputStream.close();
+
+    }
     /**
      *
      * ALTER TABLE `business_reconciliation_his_000`
@@ -155,10 +172,10 @@ public class InitSqlTest {
 
     @Test
     public  void multiChannelIndexSqlTestEnv1(){
-        for(int i = 0 ;i<2;i++){
+        for(int i = 0 ;i<128;i++){
             StringBuffer sql = new StringBuffer("ALTER TABLE reconciliation_result_");
-            sql.append(String.format("%01d",i));
-            sql.append(" DROP INDEX lx_order_id ,ADD UNIQUE INDEX lx_order_id (order_id, fund_channel_code) USING BTREE ;");
+            sql.append(String.format("%03d",i));
+            sql.append(" DROP INDEX order_result_unique ,ADD UNIQUE INDEX order_result_unique (order_id, fund_channel_code) USING BTREE ;");
             System.out.println(sql.toString());
         }
     }
@@ -174,7 +191,7 @@ public class InitSqlTest {
     }
     @Test
     public void testddd() {
-        System.out.println("hash:" + "1612220045194096120326".hashCode() % 128);
+        System.out.println("hash:" + "1701160012927087145007".hashCode() % 128);
         Integer a = null;
         if(a !=null && a ==9){
             System.out.println(a);
