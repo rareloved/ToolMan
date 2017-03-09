@@ -159,9 +159,9 @@ public class InitSqlTest {
         OutputStream outputStream = new FileOutputStream("src/moneyBoxBankNoLength.sql");
         StringBuffer sqlTotal = new StringBuffer();
         for(int i = 0 ;i<128;i++){
-            StringBuffer sql = new StringBuffer("ALTER TABLE business_reconciliation_his_");
+            StringBuffer sql = new StringBuffer("ALTER TABLE order_reconciliation_redundancy_his_");
             sql.append(String.format("%03d",i));
-            sql.append(" MODIFY COLUMN bank_card_no  varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行卡号' AFTER trade_status;");
+            sql.append(" MODIFY COLUMN pay_bank_cardno  varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '支付银行卡号' AFTER trade_initial_state;");
             sqlTotal.append(sql +"\n");
             System.out.println(sql.toString());
         }
@@ -196,5 +196,29 @@ public class InitSqlTest {
         if(a !=null && a ==9){
             System.out.println(a);
         }
+    }
+
+
+    /**
+     * ALTER TABLE `order_reconciliation_redundancy`
+     ADD COLUMN `letv_user_id`  bigint(20) NULL COMMENT '用户id' AFTER `telephone`;
+     * 订单表、
+     * @throws IOException
+     */
+    @Test
+    public  void orderHistory() throws IOException {
+//        OutputStream outputStream = new FileOutputStream("src/multiChannel.sql");
+        StringBuffer sqlTotal = new StringBuffer();
+        for(int i = 0 ;i<128;i++){
+            StringBuffer sql = new StringBuffer("ALTER TABLE reconciliation_result_");
+            sql.append(String.format("%03d",i));
+            sql.append(" ADD COLUMN letv_user_id  bigint(20) NULL COMMENT '用户id' AFTER telephone;");
+            sqlTotal.append(sql +"\n");
+            System.out.println(sql.toString());
+        }
+//        System.out.println(sqlTotal.toString());
+//        outputStream.write(sqlTotal.toString().getBytes());
+//        outputStream.close();
+
     }
 }

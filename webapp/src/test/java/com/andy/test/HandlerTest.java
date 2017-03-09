@@ -2,6 +2,8 @@ package com.andy.test;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 /**
  * 移位运算符<<   >>
  * Created by zhangshouzheng on 16-9-29.
@@ -15,6 +17,10 @@ public class HandlerTest {
 //            final int pageStart = (i * 100);
 //            System.out.println("pageStart:"+pageStart);
 //        }
-        System.out.println("hash:"+"D20161019101449160003128379".hashCode()%128);
+//        System.out.println("hash:"+"D20170117142802160011849479".hashCode()%128);
+        BigDecimal sumMoney = new BigDecimal("0");
+        if(sumMoney != null && sumMoney.compareTo(new BigDecimal("0")) > 0) {
+            System.out.println("get in it");
+        }
     }
 }
