@@ -22,6 +22,9 @@ public class UUIDUtil {
 //        }
 //        System.out.println("H20170228142743160016079179".hashCode()%128);
         System.out.println("1703060016287161010012".hashCode()%128);
+        System.out.println("1703060016287161010012".hashCode()%128);
+        System.out.println("1703060016287161010012".hashCode()%128);
+        System.out.println("1703060016287161010012".hashCode()%128);
     }
 
 }
